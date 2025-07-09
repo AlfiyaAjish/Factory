@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Environments
+.env
+.env.*
+.venv/
+venv/
+ENV/
+env.bak/
+*.env
+
+
+
+# Logs
+*.log
+*.out
+
+
+
+# PyCharm
+*.iml
+*.ipr
+*.iws
+
+
+
+requirements.txt
+
+# MQTT Certs
+certificate/*.crt
+certificate/*.key

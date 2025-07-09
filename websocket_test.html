@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Alert Tester</title>
+</head>
+<body>
+  <h2>🔧 Smart Factory WebSocket Test</h2>
+  <p id="status">Connecting to WebSocket...</p>
+  <ul id="messages"></ul>
+
+  <script>
+    const status = document.getElementById("status");
+    const messages = document.getElementById("messages");
+
+    const socket = new WebSocket("ws://127.0.0.1:8011/ws/alerts");
+
+    socket.onopen = () => {
+      status.textContent = " Connected to WebSocket!";
+    };
+
+    socket.onmessage = (event) => {
+      const li = document.createElement("li");
+      li.textContent = " Alert: " + event.data;
+      messages.appendChild(li);
+    };
+
+    socket.onerror = (error) => {
+      status.textContent = "WebSocket Error!";
+      console.error("WebSocket error:", error);
+    };
+
+    socket.onclose = () => {
+      status.textContent = "🔌 WebSocket Disconnected.";
+    };
+  </script>
+</body>
+</html>

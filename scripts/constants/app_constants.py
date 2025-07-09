@@ -1,0 +1,2 @@
+ALERT_TEMP_THRESHOLD = 80.0
+BASE_URL = "http://localhost:8009"
