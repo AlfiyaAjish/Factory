@@ -16,17 +16,7 @@ def register(machine: Machine):
     register_machine(machine.dict())
     return {"message": " Machine registered successfully"}
 
-# @router.get("/report/daily")
-# def get_daily_report(
-#     date: str = Query(..., description="Format: YYYY-MM-DD"),
-#     machine_id: Optional[str] = Query(None)
-# ):
-#     reports = fetch_daily_report.fetch_daily_reports(date, machine_id)
-#
-#     if not reports:
-#         return {"message": "No report data found for given date/machine."}
-#
-#     return reports
+
 
 
 @router.get("/report/daily")

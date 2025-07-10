@@ -1,5 +1,3 @@
-# scripts/utils/mqtt_client.py
-
 import os
 import ssl
 import paho.mqtt.client as mqtt

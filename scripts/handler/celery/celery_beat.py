@@ -1,5 +1,5 @@
 from celery.schedules import crontab
-from scripts.handler.celery.periodic_tasks import celery_app
+from scripts.utils.celery.celery import celery_app
 
 celery_app.conf.beat_schedule = {
     "run-daily-report-chain": {

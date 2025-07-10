@@ -33,7 +33,7 @@ def simulate(machine_id, line):
             "units_produced": random.randint(10, 50)
         }
         topic = f"factory/{line}/{machine_id}"
-        client.publish(topic, json.dumps(payload))
+        client.publish(topic, json.dumps(payload),retain=True)
         print("Sent:", payload)
         time.sleep(5)
 

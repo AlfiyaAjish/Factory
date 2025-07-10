@@ -1,35 +1,3 @@
-# from fastapi import WebSocket
-# from bson import ObjectId
-#
-# clients = []
-#
-# async def connect_client(ws: WebSocket):
-#     await ws.accept()
-#     clients.append(ws)
-#
-# def disconnect_client(ws: WebSocket):
-#     if ws in clients:
-#         clients.remove(ws)
-#
-# async def alert_clients(alert: dict):
-#     print(" Broadcasting alert to WebSocket clients...")
-#
-#     if "_id" in alert and isinstance(alert["_id"], ObjectId):
-#         alert["_id"] = str(alert["_id"])
-#
-#     disconnected = []
-#     for ws in clients:
-#         try:
-#             await ws.send_json(alert)
-#         except Exception as e:
-#             print(f" Failed to send alert to a client: {e}")
-#             disconnected.append(ws)
-#
-#     for ws in disconnected:
-#         disconnect_client(ws)
-#
-#
-#
 
 
 import asyncio
@@ -39,7 +7,7 @@ import os
 from bson import ObjectId
 
 clients = []
-redis_listener_task = None  # <-- Task holder
+redis_listener_task = None
 
 REDIS_BROKER = os.getenv("REDIS_BROKER")
 ALERT_CHANNEL = os.getenv("ALERT_CHANNEL", "alert_notifications")
@@ -58,7 +26,7 @@ async def alert_clients(alert: dict):
 
     print("Broadcasting alert to WebSocket clients:", alert)
 
-    for ws in clients[:]:  # Copy to avoid iteration issues
+    for ws in clients[:]:
         try:
             await ws.send_json(alert)
         except Exception as e:
