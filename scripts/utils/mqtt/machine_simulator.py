@@ -13,11 +13,11 @@ def register(machine_id, line):
         "location": "Factory-A",
         "operator": "John Doe"
     }
-    try:
-        res = requests.post("http://localhost:8012/machine/register/", json=machine_info)
-        print(res.status_code, res.json())
-    except Exception as e:
-        print(" Failed to register machine:", e)
+    # try:
+    #     res = requests.post("http://localhost:8012/machine/register/", json=machine_info)
+    #     print(res.status_code, res.json())
+    # except Exception as e:
+    #     print(" Failed to register machine:", e)
 
 def simulate(machine_id, line):
     client = mqtt.Client()

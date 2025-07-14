@@ -21,6 +21,14 @@ spec:
           envFrom:
             - secretRef:
                 name: app-secrets
+          volumeMounts:
+            - name: mqtt-cert
+              mountPath: /app/certificate
+              readOnly: true
+            volumes:
+              - name: mqtt-cert
+                secret:
+                  secretName: mqtt-cert-secret
 ---
 apiVersion: v1
 kind: Service
