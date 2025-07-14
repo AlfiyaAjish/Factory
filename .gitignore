@@ -33,6 +33,4 @@ env.bak/
 
 requirements.txt
 
-# MQTT Certs
-certificate/*.crt
-certificate/*.key
+
