@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-worker
+  namespace: alfiya-ajish
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: celery
+  template:
+    metadata:
+      labels:
+        app: celery
+    spec:
+      containers:
+        - name: celery
+          image: alfiya2821/factory:latest
+          command: ["celery", "-A", "scripts.handler.celery.periodic_tasks", "worker", "--loglevel=info", "--pool=solo", "--concurrency=1"]
+          envFrom:
+            - secretRef:
+                name: app-secret
