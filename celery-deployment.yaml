@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: celery
-          image: alfiya2821/factory:v1
+          image: alfiya2821/factory:v2
           command: ["celery", "-A", "scripts.handler.celery.periodic_tasks", "worker", "--loglevel=info", "--pool=solo", "--concurrency=1"]
           envFrom:
             - secretRef:

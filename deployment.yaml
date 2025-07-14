@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: fastapi
-          image: alfiya2821/factory:v1
+          image: alfiya2821/factory:v2
           ports:
             - containerPort: 8000
           envFrom:
