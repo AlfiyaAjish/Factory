@@ -19,4 +19,4 @@ spec:
           command: ["celery", "-A", "scripts.handler.celery.periodic_tasks", "worker", "--loglevel=info", "--pool=solo", "--concurrency=1"]
           envFrom:
             - secretRef:
-                name: app-secret
+                name: app-secrets

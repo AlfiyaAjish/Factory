@@ -20,7 +20,7 @@ spec:
             - containerPort: 8000
           envFrom:
             - secretRef:
-                name: app-secret
+                name: app-secrets
 ---
 apiVersion: v1
 kind: Service
