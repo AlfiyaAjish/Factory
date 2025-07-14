@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: flower
-          image: alfiya2821/factory:latest
+          image: alfiya2821/factory:v1
           command: ["celery", "-A", "scripts.utils.celery.celery", "flower", "--port=5555"]
           ports:
             - containerPort: 5555
