@@ -15,5 +15,5 @@ class ReportModel(BaseModel):
 class Machine(BaseModel):
     machine_id: str
     line: str
-    location: str
+    base_temperature: str
     operator: str

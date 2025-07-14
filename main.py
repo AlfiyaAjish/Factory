@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from scripts.utils.mqtt.mqtt_subscriber import start_subscriber
-from scripts.utils.celery.start_beat import start_celery_beat
+
 from scripts.utils.websocket.websocket_manager import redis_alert_listener
 
 
@@ -12,9 +12,10 @@ from scripts.service.websocket import router as websocket_router
 
 app = FastAPI()
 
-app.include_router(service.router)
-app.include_router(auth.router)
-app.include_router(trigger_report_tasks.router, prefix="/tasks")
+
+app.include_router(auth.router,tags=["user"])
+app.include_router(service.router,tags=["machine"])
+app.include_router(trigger_report_tasks.router, prefix="/tasks",tags=["celery"])
 app.include_router(websocket_router, prefix="/ws")
 
 
@@ -23,14 +24,12 @@ redis_task = None
 
 @app.on_event("startup")
 async def startup_event():
-    global redis_task
+    # global redis_task
     loop = asyncio.get_running_loop()
 
     print(" FastAPI Startup: Starting MQTT client...")
     start_subscriber(loop)
 
-    print("FastAPI Startup: Starting Celery Beat...")
-    start_celery_beat()
 
     print("Starting Redis Alert Listener...")
     redis_task = asyncio.create_task(redis_alert_listener())

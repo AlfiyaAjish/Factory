@@ -2,6 +2,7 @@ import jwt
 from datetime import datetime, timedelta
 from fastapi import HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from typing import Optional
 
 SECRET_KEY = "your_super_secret_key"
 ALGORITHM = "HS256"
@@ -9,7 +10,16 @@ TOKEN_EXPIRE_MINUTES = 60
 
 security = HTTPBearer()
 
-def create_jwt(user_id: str, role: str, owned_by: str):
+# def create_jwt(user_id: str, role: str, owned_by: str):
+#     payload = {
+#         "sub": user_id,
+#         "role": role,
+#         "owned_by": owned_by,
+#         "exp": datetime.utcnow() + timedelta(minutes=TOKEN_EXPIRE_MINUTES)
+#     }
+#     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
+def create_jwt(user_id: str, role: str, owned_by: Optional[str]):
     payload = {
         "sub": user_id,
         "role": role,

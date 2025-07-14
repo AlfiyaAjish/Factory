@@ -14,7 +14,7 @@ def register(machine_id, line):
         "operator": "John Doe"
     }
     try:
-        res = requests.post("http://localhost:8009/machine/register/", json=machine_info)
+        res = requests.post("http://localhost:8012/machine/register/", json=machine_info)
         print(res.status_code, res.json())
     except Exception as e:
         print(" Failed to register machine:", e)
@@ -24,8 +24,8 @@ def simulate(machine_id, line):
     client.username_pw_set(os.getenv("MQTT_USERNAME"), os.getenv("MQTT_PASSWORD"))
     client.tls_set(os.getenv("CA_CERT_PATH"))
     client.connect(os.getenv("MQTT_BROKER"), int(os.getenv("MQTT_PORT")))
-
-    while True:
+    i=0
+    while i < 6:
         payload = {
             "machine_id": machine_id,
             "line": line,
@@ -36,6 +36,7 @@ def simulate(machine_id, line):
         client.publish(topic, json.dumps(payload),retain=True)
         print("Sent:", payload)
         time.sleep(5)
+        i=i+1
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
