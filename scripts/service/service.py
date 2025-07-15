@@ -29,6 +29,7 @@ def list_all_machines(user: dict = Depends(get_current_user)):
     role = user["role"]
     owned_by = user["owned_by"]
 
+
     if user["role"] != "admin" and not user["owned_by"]:
         raise HTTPException(status_code=403, detail="Access denied: ownership not assigned.")
 

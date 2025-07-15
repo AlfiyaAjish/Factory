@@ -25,7 +25,7 @@ def simulate(machine_id, line):
     client.tls_set(os.getenv("CA_CERT_PATH"))
     client.connect(os.getenv("MQTT_BROKER"), int(os.getenv("MQTT_PORT")))
     i=0
-    while i < 6:
+    while i < 9:
         payload = {
             "machine_id": machine_id,
             "line": line,
@@ -44,5 +44,5 @@ if __name__ == "__main__":
     parser.add_argument("--line", required=True)
     args = parser.parse_args()
 
-    register(args.id, args.line)
+    # register(args.id, args.line)
     simulate(args.id, args.line)

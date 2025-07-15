@@ -76,12 +76,18 @@ def login_user(user: UserLogin):
 
     role = db_user["role"]
     ownership = ownership_collection.find_one({"user_id": user.user_id})
-
+    print("Ownership:", ownership)
 
     owned_by = None
     if ownership:
-        owned_by = ownership.get("line") if role == "engineer" else ownership.get("machine_id")
+        if role == "engineer":
+            owned_by = ownership.get("line")
+        elif role == "operator":
+            owned_by = ownership.get("machine_id")
+        else:
+            owned_by = None
 
+    print("Owned By:", owned_by)
     token = create_jwt(db_user["user_id"], role, owned_by)
     return {"access_token": token}
 
